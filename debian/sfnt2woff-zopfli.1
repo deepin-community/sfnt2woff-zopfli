@@ -1,0 +1,57 @@
+.TH man 1 "20 Feb 2018" "1.1.0" "sfnt2woff-zopfli man page"
+.SH NAME
+sfnt2woff-zopfli \- Create WOFF files with Zopfli compression
+.SH SYNOPSIS
+.B sfnt2woff\-zopfli
+[\fIOPTIONS\fR] <\fIotffile\fR>
+
+.B woff2sfnt-zopfli
+[\fIOPTIONS\fR] <\fIwoff\fR>
+.SH DESCRIPTION
+This is a modified version of the sfnt2woff utility that uses Zopfli as a
+compression algorithm instead of zlib.  This results in compression gains
+of, on average, 5\-8% compared to regular WOFF files.  Zopfli generates
+compressed output that is compatible with regular zlib compression so
+the resulting WOFF files can be used everywhere.
+.SH USAGE
+
+.SS OpenType to WOFF
+
+To create a WOFF file from an OpenType files:
+.LP
+\fBsfnt2woff\-zopfli\fR [\-v\ <maj>.<min>]\ [\-m\ <metadata.xml>]\ [\-p\ <private.dat>]\ <otffile>
+.LP
+Options:
+.TP
+.BR "\-v " <maj>.<min>
+set\ font\ version\ number\ (major\ and\ minor,\ both\ integers)
+.TP
+.BR "\-m " <metadata.xml>
+include\ metadata\ from\ <metadata.xml>\ (not\ validated)
+.TP
+.BR "\-i " <iterations>
+number\ of\ zopfli\ iterations\ (default\ =\ 15)
+.TP
+.BR "\-p " <private.dat>
+include\ private\ data\ block
+
+.SS WOFF to OpenType
+
+To decompress a WOFF file and write the OpenType file to stdout:
+.LP
+\fBwoff2sfnt\-zopfli\fR [\-v\ |\ \-m\ |\ \-p]\ <woff>
+.LP
+Options:
+.TP
+.BR \-v
+write\ font\ version\ to\ stdout
+.TP
+.BR \-m
+write\ WOFF\ metadata\ block\ to\ stdout
+.TP
+.BR \-p
+write\ private\ data\ block\ to\ stdout
+
+.SH AUTHOR
+This manpage was written for the Debian sfnt2woff-zopfli package by Paride Legovini
+<pl@ninthfloor.org>.

@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+
+PACKAGE = sfnt2woff-zopfli
+PKGDIR  = $(CURDIR)/debian/$(PACKAGE)
+BINDIR  = $(PKGDIR)/usr/bin
+
+# https://wiki.debian.org/HardeningWalkthrough
+export DEB_BUILD_MAINT_OPTIONS  = hardening=+all
+export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+
+%:
+	dh $@
+
+override_dh_auto_install:
+	install -D -m 755 sfnt2woff-zopfli $(BINDIR)/sfnt2woff-zopfli
+	install -D -m 755 woff2sfnt-zopfli $(BINDIR)/woff2sfnt-zopfli

@@ -1,0 +1,25 @@
+From: Paride Legovini <pl@ninthfloor.org>
+Date: Wed, 14 Feb 2018 01:27:42 +0100
+Subject: Patch Makefile to honor CFLAGS and CPPFLAGS
+
+---
+ Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index cb2577a..47e83dd 100644
+--- a/Makefile
++++ b/Makefile
+@@ -3,10 +3,10 @@ FILES=blocksplitter.c cache.c deflate.c gzip_container.c hash.c katajainen.c lz7
+ all: sfnt2woff-zopfli woff2sfnt-zopfli
+ 
+ sfnt2woff-zopfli: sfnt2woff.c $(FILES) Makefile
+-	$(CC) $(LDFLAGS) $(FILES) $< -o $@ -lz -lm
++	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $(FILES) $< -o $@ -lz -lm
+ 
+ woff2sfnt-zopfli: woff2sfnt.c $(FILES) Makefile
+-	$(CC) $(LDFLAGS) $(FILES) $< -o $@ -lz -lm
++	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $(FILES) $< -o $@ -lz -lm
+ 
+ clean:
+ 	$(RM) -r *.o *.dSYM sfnt2woff-zopfli woff2sfnt-zopfli *.gch *.out
